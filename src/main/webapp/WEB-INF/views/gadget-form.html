@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm/Chỉnh sửa thiết bị</title>
+    <style>
+        .error { color: red; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+<h2>Form thiết bị</h2>
+
+<form th:action="@{/gadgets/save}" th:object="${gadget}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label for="productName">Tên sản phẩm:</label>
+    <input type="text" id="productName" th:field="*{productName}" placeholder="Nhập tên sản phẩm"/>
+    <div th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" class="error"></div>
+
+    <label for="brand">Hãng sản xuất:</label>
+    <input type="text" id="brand" th:field="*{brand}" placeholder="Nhập hãng sản xuất"/>
+    <div th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}" class="error"></div>
+
+    <label for="stockQuantity">Số lượng tồn kho:</label>
+    <input type="number" id="stockQuantity" th:field="*{stockQuantity}" min="0" placeholder="Nhập số lượng"/>
+    <div th:if="${#fields.hasErrors('stockQuantity')}" th:errors="*{stockQuantity}" class="error"></div>
+
+    <button type="submit">Lưu</button>
+</form>
+
+<a th:href="@{/gadgets}">Quay lại danh sách</a>
+</body>
+</html>
